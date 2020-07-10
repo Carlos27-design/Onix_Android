@@ -9,10 +9,8 @@
     <ListView
         android:id="@+id/lsEntregas"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="508dp"
         android:layout_marginTop="1dp"
-        android:layout_marginBottom="132dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnIniciarEntrega"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,11 +21,10 @@
         android:id="@+id/btnIniciarEntrega"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="42dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="52dp"
         android:text="Iniciar Entrega"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lsEntregas" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

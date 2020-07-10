@@ -114,6 +114,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
         mMap.setMyLocationEnabled(true);
 
+
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
@@ -132,7 +133,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                     mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                     String key = "AIzaSyCPbmbwnzr6pTvylADbwuOy1ycWS6aSGmQ";
-                    String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + latitudOrigen + "," + longitudOrigen + "&destination="+lat+","+lng+"&key=" + key;
+                    String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + latitudOrigen + "," + longitudOrigen + "&destination=" + lat + "," + lng + "&key=" + key;
                     RequestQueue request = Volley.newRequestQueue(Maps.this);
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                         @Override
@@ -152,23 +153,26 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                     });
                     request.add(stringRequest);
 
-                }
-            }
-        });
 
-        String entregas = "";
+                }
+
+            }
+
+
+
+
+        });
         bundle = getIntent().getExtras();
         lista = bundle.getParcelableArrayList("lista");
+        String entregas = "";
 
         for (int i = 0; i < lista.size(); i++) {
             entregas = lista.get(i).getDireccionEntregaNombre();
             CoordGPS(entregas, this, "Marcador n°" + i);
         }
 
-
-
-
     }
+
     private void CoordGPS(String entregas, Context context, String nombre) {
         Geocoder gc = new Geocoder(context, Locale.ENGLISH);
         List<Address> addresses;
@@ -190,6 +194,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         JSONArray jRoutes;
         JSONArray jLegs;
         JSONArray jSteps;
+
 
         try {
             jRoutes = json.getJSONArray("routes");
@@ -219,6 +224,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
 
 
+
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -239,6 +245,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
             // permissions this app might request.
         }
     }
+
+
 
 
 }

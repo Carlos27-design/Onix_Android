@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -24,8 +25,9 @@ public class mostrarEntregas extends AppCompatActivity {
 
     private ListView lsEntregas;
     private Button iniciarEntregas;
+    private Button test;
     private AsyncHttpClient client;
-    Bundle bundle = new Bundle();
+    Bundle bundles = new Bundle();
     private ArrayList<Entrega> lista = new ArrayList<>();
 
     @Override
@@ -36,6 +38,23 @@ public class mostrarEntregas extends AppCompatActivity {
         lsEntregas = (ListView) findViewById(R.id.lsEntregas);
         iniciarEntregas = (Button) findViewById(R.id.btnIniciarEntrega);
         client = new AsyncHttpClient();
+
+        lsEntregas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Entrega e = lista.get(position);
+                Intent finalizarEntrega = new Intent(mostrarEntregas.this, finalizarEntrega.class);
+                Bundle bundle = new Bundle();
+                int ids = bundles.getInt("id");
+                finalizarEntrega.putExtra("ids", ids);
+                finalizarEntrega.putExtra("id", e.getId());
+                finalizarEntrega.putExtras(bundle);
+                startActivity(finalizarEntrega);
+
+
+            }
+        });
+
 
         iniciarEntregas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,13 +68,15 @@ public class mostrarEntregas extends AppCompatActivity {
         });
 
 
+
+
         ObtenerEntrega();
 
     }
 
     private void ObtenerEntrega() {
-        bundle = getIntent().getExtras();
-        int id = bundle.getInt("id");
+        bundles = getIntent().getExtras();
+        int id = bundles.getInt("id");
 
         String url = "https://onixs.000webhostapp.com/ObtenerRutaOrdenada.php?id=" + id;
         client.get(url, new AsyncHttpResponseHandler() {
