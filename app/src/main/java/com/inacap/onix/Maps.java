@@ -159,8 +159,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
             }
 
 
-
-
         });
         bundle = getIntent().getExtras();
         lista = bundle.getParcelableArrayList("lista");
@@ -211,7 +209,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                         String polyline = "" + ((JSONObject) ((JSONObject) jSteps.get(k)).get("polyline")).get("points");
                         Log.i("end", "" + polyline);
                         List<LatLng> list = PolyUtil.decode(polyline);
-                        mMap.addPolyline(new PolylineOptions().addAll(list).color(Color.BLUE).width(6));
+                        mMap.addPolyline(new PolylineOptions().addAll(list).color(Color.BLUE).width(5));
                     }
                 }
 
@@ -220,9 +218,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
             e.printStackTrace();
         }
     }
-
-
-
 
 
     public void onRequestPermissionsResult(int requestCode,
@@ -245,8 +240,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
             // permissions this app might request.
         }
     }
-
-
 
 
 }
