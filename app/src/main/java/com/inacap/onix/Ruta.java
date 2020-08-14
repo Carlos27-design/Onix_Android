@@ -1,6 +1,9 @@
 package com.inacap.onix;
 
-public class Ruta {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Ruta implements Parcelable {
     private int id;
     private String direccionInicioNombre;
     private String direccionInicio;
@@ -13,6 +16,7 @@ public class Ruta {
     public Ruta() {
     }
 
+
     public Ruta(int id, String direccionInicioNombre, String direccionInicio, String direccionFinalNombre, String direccionFinal, String distancia, String fechaInicio, String fechaFin) {
         this.id = id;
         this.direccionInicioNombre = direccionInicioNombre;
@@ -23,6 +27,29 @@ public class Ruta {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
     }
+
+    protected Ruta(Parcel in) {
+        id = in.readInt();
+        direccionInicioNombre = in.readString();
+        direccionInicio = in.readString();
+        direccionFinalNombre = in.readString();
+        direccionFinal = in.readString();
+        distancia = in.readString();
+        fechaInicio = in.readString();
+        fechaFin = in.readString();
+    }
+
+    public static final Creator<Ruta> CREATOR = new Creator<Ruta>() {
+        @Override
+        public Ruta createFromParcel(Parcel in) {
+            return new Ruta(in);
+        }
+
+        @Override
+        public Ruta[] newArray(int size) {
+            return new Ruta[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -90,6 +117,23 @@ public class Ruta {
 
     @Override
     public String toString() {
-        return "direccionInicioNombre='" + direccionInicioNombre + ", direccionFinalNombre='" + direccionFinalNombre + ", distancia='" + distancia + ", fechaInicio='" + fechaInicio + ", fechaFin='" + fechaFin;
+        return "direccionInicioNombre='" + direccionInicioNombre + ", fechaInicio='" + fechaInicio + ", fechaFin='" + fechaFin;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(direccionInicioNombre);
+        dest.writeString(direccionInicio);
+        dest.writeString(direccionFinalNombre);
+        dest.writeString(direccionFinal);
+        dest.writeString(distancia);
+        dest.writeString(fechaInicio);
+        dest.writeString(fechaFin);
     }
 }

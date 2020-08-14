@@ -40,6 +40,7 @@ public class mostrarRuta extends AppCompatActivity {
                 Intent mostrarEntrega = new Intent(mostrarRuta.this, mostrarEntregas.class);
                 Bundle bundle = new Bundle();
                 mostrarEntrega.putExtra("id", r.getId());
+                mostrarEntrega.putExtra("ruta",r);
                 mostrarEntrega.putExtras(bundle);
                 startActivity(mostrarEntrega);
             }

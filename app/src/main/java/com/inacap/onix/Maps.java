@@ -51,6 +51,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     JSONObject json;
     Bundle bundle = new Bundle();
     ArrayList<Entrega> lista = new ArrayList<>();
+    Ruta r;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,28 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+
+        bundle = getIntent().getExtras();
+        r = bundle.getParcelable("ruta");
+        lista = bundle.getParcelableArrayList("lista");
+
+        String[] coordenadasRuta = r.getDireccionInicio().split(",");
+        Double latR = Double.parseDouble(coordenadasRuta[0]);
+        Double lngR = Double.parseDouble(coordenadasRuta[1]);
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latR, lngR))
+                .title("Punto de Inicio "+r.getDireccionInicioNombre()));
+
+        for (int i = 0; i < lista.size(); i++) {
+            String direccionEntrega = lista.get(i).getDireccionEntrega();
+            String[] coordenadas = direccionEntrega.split(",");
+            Double lat = Double.parseDouble(coordenadas[0]);
+            Double lng = Double.parseDouble(coordenadas[1]);
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(lat, lng))
+                    .title(lista.get(i).getDireccionEntregaNombre()));
+        }
         // Add a marker in Sydney and move the camera
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -133,7 +157,50 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                     mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                     String key = "AIzaSyCPbmbwnzr6pTvylADbwuOy1ycWS6aSGmQ";
-                    String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + latitudOrigen + "," + longitudOrigen + "&destination=" + lat + "," + lng + "&key=" + key;
+                    //VERIFICAR SI SON MÁS DE DOS ENTREGAS, NECESITA WAYPOINTS
+                    //ULTIMA ENTREGA, DEBE ESTAR EN DESTINO
+
+                    if (lista.size() >= 1 && lista.size() <= 2) {
+
+                        String origen = r.getDireccionInicio();
+                        String destino = lista.get(lista.size() - 1).getDireccionEntrega();
+                        url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + origen + "&destination=" + destino;
+                        url += "&waypoints=";
+                        int contador = 0;
+                        for (int i = 0; i < (lista.size() - 1); i++) {
+                            contador += 1;
+                            if(contador < lista.size() - 1){
+                                url += lista.get(i).getDireccionEntrega() + "|";
+                            }else{
+                                url += lista.get(i).getDireccionEntrega();
+                            }
+
+                        }
+                        url += "&key=AIzaSyCPbmbwnzr6pTvylADbwuOy1ycWS6aSGmQ";
+                    }
+                    if (lista.size() > 2) {
+                        System.out.println("aqui");
+                        String origen = r.getDireccionInicio();
+                        String destino = lista.get(lista.size() - 1).getDireccionEntrega();
+                        url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + origen + "&destination=" + destino;
+                        url += "&waypoints=";
+                        int contador = 0;
+                        for (int i = 0; i < (lista.size() - 1); i++) {
+                            contador += 1;
+                            if(contador < lista.size() - 1){
+                                url += lista.get(i).getDireccionEntrega() + "|";
+                            }else{
+                                url += lista.get(i).getDireccionEntrega();
+                            }
+
+                        }
+                        url += "&key=AIzaSyCPbmbwnzr6pTvylADbwuOy1ycWS6aSGmQ";
+                    }
+                    System.out.println("====================================");
+                    System.out.println("TEST");
+                    System.out.println("test"+url);
+                    //String url = "https://maps.googleapis.com/maps/api/directions/json?origin=-40.91572950760404,-73.15556645393373&destination=-40.91131702279448,-73.15750837326051&waypoints=-40.91562816366299,-73.1557238104142&key=AIzaSyCPbmbwnzr6pTvylADbwuOy1ycWS6aSGmQ";
+                    //String url = "https://maps.googleapis.com/maps/api/directions/json?origin=-40.91572950760404,-73.15556645393373&destination=-40.91131702279448,-73.15750837326051&waypoints=-40.91562816366299,-73.1557238104142&key=AIzaSyCPbmbwnzr6pTvylADbwuOy1ycWS6aSGmQ";
                     RequestQueue request = Volley.newRequestQueue(Maps.this);
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                         @Override
@@ -160,14 +227,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
 
         });
-        bundle = getIntent().getExtras();
-        lista = bundle.getParcelableArrayList("lista");
-        String entregas = "";
 
-        for (int i = 0; i < lista.size(); i++) {
-            entregas = lista.get(i).getDireccionEntregaNombre();
-            CoordGPS(entregas, this, "Marcador n°" + i);
-        }
 
     }
 

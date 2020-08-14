@@ -8,10 +8,11 @@
 
     <ListView
         android:id="@+id/lsEntregas"
-        android:layout_width="0dp"
-        android:layout_height="508dp"
-        android:layout_marginTop="1dp"
+        android:layout_width="414dp"
+        android:layout_height="626dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
