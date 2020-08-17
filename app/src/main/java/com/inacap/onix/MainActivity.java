@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
                     if (contrasena.equals(txtcontrasena.getText().toString())) {
                         Toast.makeText(MainActivity.this, "Bienvenido a Onix", Toast.LENGTH_LONG).show();
                         Intent menuTransportista = new Intent(MainActivity.this, menuTransportista.class);
+                        Bundle bundle = new Bundle();
+                        menuTransportista.putExtra(txtrut.getText().toString(), "rut");
+                        menuTransportista.putExtras(bundle);
                         startActivity(menuTransportista);
                     } else {
                         Toast.makeText(MainActivity.this, "Verifique su rut / Contrasena", Toast.LENGTH_LONG).show();

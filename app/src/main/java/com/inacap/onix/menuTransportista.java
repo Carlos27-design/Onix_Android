@@ -14,6 +14,7 @@ public class menuTransportista extends AppCompatActivity {
 
     private Button mostrarRuta, cerrarSesion;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +27,10 @@ public class menuTransportista extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent mostrarRuta = new Intent(menuTransportista.this, mostrarRuta.class);
+                Bundle bundle = new Bundle();
+                String Rut = bundle.toString();
+                mostrarRuta.putExtra(Rut, "rut");
+                mostrarRuta.putExtras(bundle);
                 startActivity(mostrarRuta);
             }
         });
