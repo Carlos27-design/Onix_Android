@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button iniciarSesion;
     private EditText txtrut, txtcontrasena;
+
     RequestQueue request;
 
     @Override
