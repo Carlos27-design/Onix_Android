@@ -28,8 +28,9 @@ public class menuTransportista extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mostrarRuta = new Intent(menuTransportista.this, mostrarRuta.class);
                 Bundle bundle = new Bundle();
-                String Rut = bundle.toString();
-                mostrarRuta.putExtra(Rut, "rut");
+                bundle = getIntent().getExtras();
+                String Rut = bundle.getString("rut");
+                mostrarRuta.putExtra("rut",Rut);
                 mostrarRuta.putExtras(bundle);
                 startActivity(mostrarRuta);
             }

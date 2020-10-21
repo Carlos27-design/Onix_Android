@@ -53,11 +53,12 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     String contrasena = jsonArray.getString(0);
+
                     if (contrasena.equals(txtcontrasena.getText().toString())) {
                         Toast.makeText(MainActivity.this, "Bienvenido a Onix", Toast.LENGTH_LONG).show();
                         Intent menuTransportista = new Intent(MainActivity.this, menuTransportista.class);
                         Bundle bundle = new Bundle();
-                        menuTransportista.putExtra(txtrut.getText().toString(), "rut");
+                        menuTransportista.putExtra("rut", txtrut.getText().toString());
                         menuTransportista.putExtras(bundle);
                         startActivity(menuTransportista);
                     } else {

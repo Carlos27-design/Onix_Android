@@ -52,7 +52,8 @@ public class mostrarRuta extends AppCompatActivity {
 
     private void ObtenerRuta() {
         Bundle bundle = new Bundle();
-        String rut = bundle.toString();
+        bundle = getIntent().getExtras();
+        String rut = bundle.getString("rut");
         String url = "https://onixs.000webhostapp.com/mostrarRuta.php?rut="+ rut;
         client.post(url, new AsyncHttpResponseHandler() {
             @Override
