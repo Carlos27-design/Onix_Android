@@ -79,8 +79,6 @@ public class mostrarRuta extends AppCompatActivity {
                 r.setId(jsonArreglo.getJSONObject(i).getInt("id"));
                 r.setDireccionInicioNombre(jsonArreglo.getJSONObject(i).getString("direccionInicioNombre"));
                 r.setDireccionInicio(jsonArreglo.getJSONObject(i).getString("direccionInicio"));
-                r.setDireccionFinalNombre(jsonArreglo.getJSONObject(i).getString("direccionFinalNombre"));
-                r.setDireccionFinal(jsonArreglo.getJSONObject(i).getString("direccionFinal"));
                 r.setDistancia(jsonArreglo.getJSONObject(i).getString("distancia"));
                 r.setFechaInicio(jsonArreglo.getJSONObject(i).getString("fechaInicio"));
                 r.setFechaFin(jsonArreglo.getJSONObject(i).getString("fechaFin"));

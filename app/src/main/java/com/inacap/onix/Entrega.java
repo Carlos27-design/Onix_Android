@@ -17,6 +17,9 @@ public class Entrega implements Parcelable {
     private String nroDocumentoEntregado;
     private String fechaInicio;
     private String fechaEntrega;
+    private String recibidoRut;
+    private String recibidoNombre;
+    private String recibidoApellido;
     private ArrayList<Entrega> lista = new ArrayList<Entrega>();
 
     public Entrega() {
@@ -34,6 +37,9 @@ public class Entrega implements Parcelable {
         nroDocumentoEntregado = in.readString();
         fechaInicio = in.readString();
         fechaEntrega = in.readString();
+        recibidoRut = in.readString();
+        recibidoNombre = in.readString();
+        recibidoApellido = in.readString();
         lista = in.createTypedArrayList(Entrega.CREATOR);
     }
 
@@ -49,7 +55,7 @@ public class Entrega implements Parcelable {
         }
     };
 
-    public Entrega(int id, int usuario_id, int vehiculo_id, int ruta_id, int estado_id, String direccionEntregaNombre, String direccionEntrega, String indicaciones, String nroDocumentoEntregado, String fechaInicio, String fechaEntrega) {
+    public Entrega(int id, int usuario_id, int vehiculo_id, int ruta_id, int estado_id, String direccionEntregaNombre, String direccionEntrega, String indicaciones, String nroDocumentoEntregado, String fechaInicio, String fechaEntrega, String recibidoRut, String recibidoNombre, String recibidoApellido) {
         this.id = id;
         this.usuario_id = usuario_id;
         this.vehiculo_id = vehiculo_id;
@@ -61,6 +67,9 @@ public class Entrega implements Parcelable {
         this.nroDocumentoEntregado = nroDocumentoEntregado;
         this.fechaInicio = fechaInicio;
         this.fechaEntrega = fechaEntrega;
+        this.recibidoRut = recibidoRut;
+        this.recibidoNombre = recibidoNombre;
+        this.recibidoApellido = recibidoApellido;
     }
 
     public int getId() {
@@ -151,11 +160,37 @@ public class Entrega implements Parcelable {
         this.fechaEntrega = fechaEntrega;
     }
 
+    public String getRecibidoRut() {
+        return recibidoRut;
+    }
+
+    public void setRecibidoRut(String recibidoRut) {
+        this.recibidoRut = recibidoRut;
+    }
+
+    public String getRecibidoNombre() {
+        return recibidoNombre;
+    }
+
+    public void setRecibidoNombre(String recibidoNombre) {
+        this.recibidoNombre = recibidoNombre;
+    }
+
+    public String getRecibidoApellido() {
+        return recibidoApellido;
+    }
+
+    public void setRecibidoApellido(String recibidoApellido) {
+        this.recibidoApellido = recibidoApellido;
+    }
+
     @Override
     public String toString() {
         return "Direccion Entrega: " + direccionEntregaNombre +  "- Indicaciones: " + indicaciones + "- N° de Documento:" + nroDocumentoEntregado;
 
     }
+
+
 
     @Override
     public int describeContents() {
@@ -175,6 +210,9 @@ public class Entrega implements Parcelable {
         dest.writeString(nroDocumentoEntregado);
         dest.writeString(fechaInicio);
         dest.writeString(fechaEntrega);
+        dest.writeString(recibidoRut);
+        dest.writeString(recibidoNombre);
+        dest.writeString(recibidoApellido);
         dest.writeTypedList(lista);
     }
 }

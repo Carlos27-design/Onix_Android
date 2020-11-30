@@ -7,8 +7,6 @@ public class Ruta implements Parcelable {
     private int id;
     private String direccionInicioNombre;
     private String direccionInicio;
-    private String direccionFinalNombre;
-    private String direccionFinal;
     private String distancia;
     private String fechaInicio;
     private String fechaFin;
@@ -17,12 +15,10 @@ public class Ruta implements Parcelable {
     }
 
 
-    public Ruta(int id, String direccionInicioNombre, String direccionInicio, String direccionFinalNombre, String direccionFinal, String distancia, String fechaInicio, String fechaFin) {
+    public Ruta(int id, String direccionInicioNombre, String direccionInicio,  String distancia, String fechaInicio, String fechaFin) {
         this.id = id;
         this.direccionInicioNombre = direccionInicioNombre;
         this.direccionInicio = direccionInicio;
-        this.direccionFinalNombre = direccionFinalNombre;
-        this.direccionFinal = direccionFinal;
         this.distancia = distancia;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -32,8 +28,6 @@ public class Ruta implements Parcelable {
         id = in.readInt();
         direccionInicioNombre = in.readString();
         direccionInicio = in.readString();
-        direccionFinalNombre = in.readString();
-        direccionFinal = in.readString();
         distancia = in.readString();
         fechaInicio = in.readString();
         fechaFin = in.readString();
@@ -75,22 +69,6 @@ public class Ruta implements Parcelable {
         this.direccionInicio = direccionInicio;
     }
 
-    public String getDireccionFinalNombre() {
-        return direccionFinalNombre;
-    }
-
-    public void setDireccionFinalNombre(String direccionFinalNombre) {
-        this.direccionFinalNombre = direccionFinalNombre;
-    }
-
-    public String getDireccionFinal() {
-        return direccionFinal;
-    }
-
-    public void setDireccionFinal(String direccionFinal) {
-        this.direccionFinal = direccionFinal;
-    }
-
     public String getDistancia() {
         return distancia;
     }
@@ -130,8 +108,6 @@ public class Ruta implements Parcelable {
         dest.writeInt(id);
         dest.writeString(direccionInicioNombre);
         dest.writeString(direccionInicio);
-        dest.writeString(direccionFinalNombre);
-        dest.writeString(direccionFinal);
         dest.writeString(distancia);
         dest.writeString(fechaInicio);
         dest.writeString(fechaFin);

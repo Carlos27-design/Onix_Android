@@ -58,7 +58,7 @@ public class mostrarEntregas extends AppCompatActivity {
                 Intent finalizarEntrega = new Intent(mostrarEntregas.this, finalizarEntrega.class);
                 Bundle bundle = new Bundle();
                 finalizarEntrega.putExtra("id", ID);
-                finalizarEntrega.putExtra("idRuta",r);
+                finalizarEntrega.putExtra("idRu",r);
                 finalizarEntrega.putExtras(bundle);
                 startActivity(finalizarEntrega);
 
@@ -67,6 +67,8 @@ public class mostrarEntregas extends AppCompatActivity {
 
 
         });
+
+
 
 
         iniciarEntregas.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +130,9 @@ public class mostrarEntregas extends AppCompatActivity {
                 e.setNroDocumentoEntregado(jsonArreglos.getJSONObject(i).getString("nroDocumentoEntregado"));
                 e.setFechaInicio(jsonArreglos.getJSONObject(i).getString("fechaInicio"));
                 e.setFechaEntrega(jsonArreglos.getJSONObject(i).getString("fechaEntregado"));
+                e.setRecibidoRut(jsonArreglos.getJSONObject(i).getString("recibidoRut"));
+                e.setRecibidoNombre(jsonArreglos.getJSONObject(i).getString("recibidoNombre"));
+                e.setRecibidoApellido(jsonArreglos.getJSONObject(i).getString("recibidoApellido "));
 
                 lista.add(e);
             }
