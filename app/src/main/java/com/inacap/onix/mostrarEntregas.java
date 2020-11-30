@@ -55,7 +55,14 @@ public class mostrarEntregas extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Entrega e = lista.get(position);
                 int ID = e.getId();
-                msgFinalizarEntrega(ID);
+                Intent finalizarEntrega = new Intent(mostrarEntregas.this, finalizarEntrega.class);
+                Bundle bundle = new Bundle();
+                finalizarEntrega.putExtra("id", ID);
+                finalizarEntrega.putExtra("idRuta",r);
+                finalizarEntrega.putExtras(bundle);
+                startActivity(finalizarEntrega);
+
+
             }
 
 
@@ -79,45 +86,8 @@ public class mostrarEntregas extends AppCompatActivity {
 
     }
 
-    private void msgFinalizarEntrega(final int id) {
-        new AlertDialog.Builder(this)
-                .setTitle("Finalizar Entrega")
-                .setMessage("¿Desea Finalizar su entrega?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finalizarEntrega(id);
-                        Toast.makeText(mostrarEntregas.this, "Se ha finalizado la entrega", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(mostrarEntregas.this, "Sigue activa la entrega", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .show();
-    }
-
-    private void finalizarEntrega(final int id) {
-        request = Volley.newRequestQueue(this);
-        r = bundles.getParcelable("ruta");
-        final int idRuta = r.getId();
-        String url = "https://onixs.000webhostapp.com/ActActualizarEstadoAndroid.php?id=" + id + "&idRuta=" + idRuta;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
 
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        request.add(stringRequest);
-    }
 
 
     private void ObtenerEntrega() {
